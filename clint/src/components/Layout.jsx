@@ -2,6 +2,7 @@ import React from 'react'
 import { House,  DollarSign, FileTextIcon, File, Book, BookOpen, LayoutGrid, Settings, LogOut } from 'lucide-react';
 import { Outlet, NavLink } from 'react-router-dom'
 import logo from '../assets/logo.png'
+import logoWtxt from '../assets/logoWithoutText.png'
 import { useNavigate } from 'react-router-dom'
 
 const navItems = [
@@ -23,10 +24,12 @@ const Layout = () => {
         <div className='flex w-screen h-screen bg-[#f1f3f3]'>
 
             {/* SideBar */}
-            <div className='flex flex-col w-50 h-[95vh] bg-[#f5f5f5] m-4 rounded-[30px] p-1 justify-self-center items-center shadow-[0_0px_10px_0px_rgba(0,0,0,0.05)]'>
+            <div className='flex flex-col w-20 md:w-50 h-[95vh] bg-[#f5f5f5] m-4 rounded-[30px] p-1 justify-self-center items-center shadow-[0_0px_10px_0px_rgba(0,0,0,0.05)]'>
                 {/* User Profile */}
                 <div className='flex justify-center'>
-                    <img src={logo} className='mt-5 w-[90%] mb-12 select-none cursor-pointer' onClick={() =>{navigate('/')}} alt="" />
+                    <img src={logo} className='mt-5 w-[90%] mb-12 select-none cursor-pointer hidden md:block ' onClick={() =>{navigate('/')}} alt="" />
+                    <img src={logoWtxt} className='mt-5 w-[30px] mb-12 select-none cursor-pointer md:hidden ' onClick={() =>{navigate('/')}} alt="" />
+                    
                 </div>
 
                 <div className='flex flex-col gap-2'>
@@ -35,10 +38,10 @@ const Layout = () => {
                             key={to}
                             to={to}
                             end={to === '/students'}
-                            className={({ isActive }) => `px-4.5 py-2.5 flex items-center gap-4 rounded-2xl text-sm font-medium ${isActive ? 'bg-[#232323] text-white' : 'text-gray-600 hover:bg-gray-200 transition duratioon-300 hover:scale-105'} `}
+                            className={({ isActive }) => `px-4.5 py-2.5 flex items-center gap-4  rounded-2xl text-sm font-medium ${isActive ? 'bg-[#232323] text-white' : 'text-gray-600 hover:bg-gray-200 transition duratioon-300 hover:scale-105'} `}
                         >
                             <Icon className='w-5 h-5' />
-                            {label}
+                            <span className="hidden md:inline">{label}</span>
                         </NavLink>
                     ))}
                 </div>
@@ -46,11 +49,11 @@ const Layout = () => {
                 <div className='absolute bottom-15 flex flex-col gap-2'>
                     <div className='px-4.5 py-2.5 cursor-pointer flex items-center gap-4 rounded-2xl text-sm font-medium text-gray-600 hover:bg-gray-200 transition duratioon-300 hover:scale-105'>                        
                         <Settings className='w-5 h-5'/>
-                        <div>Setting</div>
+                        <div className="hidden md:inline">Setting</div>
                     </div>
                     <div className='px-4.5 py-2.5 cursor-pointer flex items-center gap-4 rounded-2xl text-sm font-medium text-gray-600 hover:bg-gray-200 transition duratioon-300 hover:scale-105'>                        
                         <LogOut className='w-5 h-5'/>
-                        <div>Log out</div>
+                        <div className="hidden md:inline">Log out</div>
                     </div>
                 </div>      
             </div>
