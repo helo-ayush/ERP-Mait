@@ -24,6 +24,7 @@ const Dashboard = () => {
     { id: 3, text: 'Submit Project Report', completed: false, dueDate: '2024-09-18' }
   ]);
   const [newTodo, setNewTodo] = useState('');
+  const [newTodoDate, setNewTodoDate] = useState('');
 
   const toggleTodo = (id) => {
     setTodos(todos.map(todo => 
@@ -32,16 +33,21 @@ const Dashboard = () => {
   };
 
   const addTodo = () => {
-    if (newTodo.trim()) {
-      setTodos([...todos, {
-        id: Date.now(),
-        text: newTodo,
-        completed: false,
-        dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-      }]);
-      setNewTodo('');
-    }
-  };
+  if (newTodo.trim() && newTodoDate.trim()) {
+    const baseDate = new Date(newTodoDate); // convert string -> Date
+    baseDate.setDate(baseDate.getDate() + 7); // add 7 days
+
+    setTodos([...todos, {
+      id: Date.now(),
+      text: newTodo,
+      completed: false,
+      dueDate: baseDate.toISOString().split('T')[0] // format as YYYY-MM-DD
+    }]);
+
+    setNewTodo('');
+    setNewTodoDate('');
+  }
+};
 
   const updates = [
     { id: 1, title: 'Mid-term Exam Schedule Released', date: '2024-09-14', pinned: true, category: 'Academic' },
@@ -82,7 +88,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex-1 p-4 md:p-6 overflow-y-auto bg-gradient-to-br from-blue-50 to-indigo-100 scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+    <div className="flex-1 p-4 md:p-6 overflow-y-auto" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
       <style>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
@@ -133,7 +139,7 @@ const Dashboard = () => {
               ))}
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-col md:flex-row">
               <input
                 type="text"
                 value={newTodo}
@@ -142,12 +148,23 @@ const Dashboard = () => {
                 className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
                 onKeyPress={(e) => e.key === 'Enter' && addTodo()}
               />
-              <button
-                onClick={addTodo}
-                className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                <Plus className="w-4 h-4" />
+
+              <div className='flex gap-2'>
+                <input
+                  type="date"
+                  value={newTodoDate}
+                  onChange={(e) => setNewTodoDate(e.target.value)}
+                  placeholder="Add new task..."
+                  className="flex-1 px-3 py-2 text-gray-500 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80"
+                  onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+                />
+                <button
+                  onClick={addTodo}
+                  className="px-3 py-2 w-10 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
               </button>
+              </div>
             </div>
           </div>
 
