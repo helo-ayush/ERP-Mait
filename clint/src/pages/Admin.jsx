@@ -245,52 +245,66 @@ const AdminDashboard = () => {
 
         {/* Right Column: College Profile */}
         <div className="lg:col-span-1">
-          <div className="backdrop-blur-md bg-white/70 rounded-2xl border border-white/20 shadow-xl p-6">
-            <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2 mb-4">
-              <Building className="w-5 h-5 text-indigo-500" />
-              College Profile
-            </h2>
-            <div className="space-y-4">
-              <div className="text-center pb-4 border-b border-white/30">
-                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                  <Building className="w-8 h-8 text-white" />
+          {collegeProfile ? (
+            <div className="backdrop-blur-md bg-white/70 rounded-2xl border border-white/20 shadow-xl p-6">
+              <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2 mb-4">
+                <Building className="w-5 h-5 text-indigo-500" />
+                College Profile
+              </h2>
+              <div className="space-y-4">
+                <div className="text-center pb-4 border-b border-white/30">
+                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <Building className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="font-bold text-gray-800">{collegeProfile?.name || '—'}</h3>
+                  <p className="text-sm text-gray-600">ID: {collegeProfile?.collegeId || '—'}</p>
                 </div>
-                <h3 className="font-bold text-gray-800">{collegeProfile.name}</h3>
-                <p className="text-sm text-gray-600">ID: {collegeProfile.collegeId}</p>
+
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-start gap-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div>
+                      <p className="font-medium text-gray-700">Address</p>
+                      <p className="text-gray-600">{collegeProfile?.address || '—'}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <div>
+                      <p className="font-medium text-gray-700">Email</p>
+                      <p className="text-gray-600">{collegeProfile?.email || '—'}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <div>
+                      <p className="font-medium text-gray-700">Phone</p>
+                      <p className="text-gray-600">{collegeProfile?.phone || '—'}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <button className="w-full mt-4 p-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-2">
+                  <Edit className="w-4 h-4" />
+                  Edit Profile
+                </button>
               </div>
-
-              <div className="space-y-3 text-sm">
-                <div className="flex items-start gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                  <div>
-                    <p className="font-medium text-gray-700">Address</p>
-                    <p className="text-gray-600">{collegeProfile.address}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <div>
-                    <p className="font-medium text-gray-700">Email</p>
-                    <p className="text-gray-600">{collegeProfile.email}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <div>
-                    <p className="font-medium text-gray-700">Phone</p>
-                    <p className="text-gray-600">{collegeProfile.phone}</p>
-                  </div>
-                </div>
-              </div>
-
+            </div>
+          ) : (
+            <div className="backdrop-blur-md bg-white/70 rounded-2xl border border-white/20 shadow-xl p-6">
+              <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2 mb-2">
+                <Building className="w-5 h-5 text-indigo-500" />
+                College Profile
+              </h2>
+              <p className="text-gray-700 text-sm">No college profile found. Please add your college details.</p>
               <button className="w-full mt-4 p-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-2">
                 <Edit className="w-4 h-4" />
-                Edit Profile
+                Add Profile
               </button>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
