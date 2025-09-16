@@ -336,7 +336,7 @@ const Home = () => {
         )}
       </div>
     </div>
-  ), [role, mode, collegeForm, teacherForm, studentJoinId]);
+  ), [role, mode, collegeForm, teacherForm, studentForm, studentJoinId]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100 relative overflow-hidden">
